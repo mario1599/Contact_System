@@ -1,5 +1,6 @@
 package com.example.Contact_system.Contact;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
@@ -12,13 +13,19 @@ public class ContactConfig {
     @Bean
     CommandLineRunner commandLineRunner(ContactRepository repository) {
         return args -> {
-                Contact kontakt1 = new Contact("Mihkel Tamm", "ninja", "59621429");
-                Contact kontakt2 = new Contact("Kertu Metsa", "sparrow", "55512345");
-                Contact kontakt3 = new Contact("Jaanus Kase", "viking", "51123456");
-                Contact kontakt4 = new Contact("Laura Leht", "phoenix", "52098765");
-                repository.saveAll(List.of(kontakt1,kontakt2,kontakt3,kontakt4));
-            };
-          
+        Contact[] contacts = {
+            new Contact("Mihkel Tamm", "ninja", "59621429"),
+            new Contact("Kertu Metsa", "sparrow", "55512345"),
+            new Contact("Jaanus Kase", "viking", "51123456"),
+            new Contact("Laura Leht", "phoenix", "52098765"),
+            new Contact("Mari Annus", "eagle", "51234567"),
+            new Contact("Olev Põld", "wolf", "53098765"),
+            new Contact("Liis Tamm", "falcon", "54432109"),
+            new Contact("Erik Kase", "tiger", "59987654")
+        };
+        
+        repository.saveAll(Arrays.asList(contacts));
         };
     }
+}
 

@@ -21,6 +21,7 @@ public List<Contact> getContacts() {
     return contactRepository.findAll();
     }
 
+    
 public String addContact( String nimi,  String koodNimi,  String telefon) {
     Contact contact = new Contact(nimi,koodNimi,telefon);
     contactRepository.save(contact);
