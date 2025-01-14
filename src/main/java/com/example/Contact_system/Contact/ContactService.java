@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ContactService {
-   
+
     private final ContactRepository contactRepository;
 
     @Autowired
@@ -15,17 +15,14 @@ public class ContactService {
         this.contactRepository = contactRepository;
     }
 
-
-public List<Contact> getContacts() {
-    return contactRepository.findAll();
+    public List<Contact> getContacts() {
+        return contactRepository.findAll();
     }
 
-    
-public String addContact( String nimi,  String koodNimi,  String telefon) {
-    Contact contact = new Contact(nimi,koodNimi,telefon);
-    contactRepository.save(contact);
-    return "ok";
-}
-
+    public String addContact(String nimi, String koodNimi, String telefon) {
+        Contact contact = new Contact(nimi, koodNimi, telefon);
+        contactRepository.save(contact);
+        return "ok";
+    }
 
 }

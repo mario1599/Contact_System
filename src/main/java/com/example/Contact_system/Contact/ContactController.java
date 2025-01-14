@@ -19,16 +19,20 @@ import lombok.AllArgsConstructor;
 public class ContactController {
 
     private final ContactService contactService;
-    
+
     @GetMapping
     public List<Contact> getContacts() {
         return contactService.getContacts();
     }
+
     @PostMapping(path = "add-contact")
-    public ResponseEntity<String> addContact(@RequestParam String nimi, @RequestParam String koodNimi, @RequestParam String telefon) {
-       contactService.addContact(nimi, koodNimi, telefon);
-            return ResponseEntity.ok().build();
-     
+    public ResponseEntity<String> addContact(@RequestParam String nimi, @RequestParam String koodNimi,
+            @RequestParam String telefon) {
+        if (nimi.length() > 20 || koodNimi.length() > 20 || telefon.length() > 10) {
+            return ResponseEntity.status(400).body("Parameetrid ei vasta nõuetele");
+        }
+        contactService.addContact(nimi, koodNimi, telefon);
+        return ResponseEntity.ok().build();
+
     }
 }
-
