@@ -21,8 +21,12 @@ public class ContactService {
 
     public String addContact(String nimi, String koodNimi, String telefon) {
         Contact contact = new Contact(nimi, koodNimi, telefon);
+        if (nimi.length() > 20 || koodNimi.length() > 20 || telefon.length() > 10) {
+            return "Parameetrid ei vasta nõuetele";
+        }
         contactRepository.save(contact);
         return "ok";
+
     }
 
 }

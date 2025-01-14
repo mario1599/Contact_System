@@ -28,11 +28,14 @@ public class ContactController {
     @PostMapping(path = "add-contact")
     public ResponseEntity<String> addContact(@RequestParam String nimi, @RequestParam String koodNimi,
             @RequestParam String telefon) {
-        if (nimi.length() > 20 || koodNimi.length() > 20 || telefon.length() > 10) {
-            return ResponseEntity.status(400).body("Parameetrid ei vasta nõuetele");
+
+        String result = contactService.addContact(nimi, koodNimi, telefon);
+        if (result == "ok") {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(400).body(result);
         }
-        contactService.addContact(nimi, koodNimi, telefon);
-        return ResponseEntity.ok().build();
 
     }
+
 }
