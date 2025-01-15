@@ -1,6 +1,7 @@
 package com.example.Contact_system.Contact;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,12 +33,12 @@ public class ContactService {
     }
 
     public String deleteContact(Long id) {
-        Contact contact = contactRepository.getContactById(id);
+       Optional<Contact> contact = contactRepository.findById(id);
 
-        if (contact == null) {
+        if (contact.isEmpty()) {
             return "ei leitud kontakti";
         }
-        contactRepository.delete(contact);
+        contactRepository.delete(contact.get());
         return "kontakt kustutatud";
 
     }
