@@ -24,14 +24,20 @@ class ContactSystemApplicationTests {
 
 	@Test
 	void testAddContact_success() {
-		String	result = contactService.addContact("Mihkel Tamm", "kalur", "51625622");
+		String result = contactService.addContact("Mihkel Tamm", "kalur", "51625622");
 		assertEquals("ok", result);
 	}
 
 	@Test
 	void testAddContact_failed() {
-		String	result = contactService.addContact("Mihkel Tammaaaaaaaaaaaaaaaaa", "kalur", "51625622");
+		String result = contactService.addContact("Mihkel Tammaaaaaaaaaaaaaaaaa", "kalur", "51625622");
 		assertEquals("Parameetrid ei vasta nõuetele", result);
+	}
+
+	@Test
+	void testDeleteContact_failed() {
+		String result = contactService.deleteContact(200L);
+		assertEquals("ei leitud kontakti", result);
 	}
 
 }

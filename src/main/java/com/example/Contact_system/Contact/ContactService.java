@@ -20,7 +20,9 @@ public class ContactService {
     }
 
     public String addContact(String nimi, String koodNimi, String telefon) {
+
         Contact contact = new Contact(nimi, koodNimi, telefon);
+
         if (nimi.length() > 20 || koodNimi.length() > 20 || telefon.length() > 10) {
             return "Parameetrid ei vasta nõuetele";
         }
@@ -29,4 +31,14 @@ public class ContactService {
 
     }
 
+    public String deleteContact(Long id) {
+        Contact contact = contactRepository.getContactById(id);
+
+        if (contact == null) {
+            return "ei leitud kontakti";
+        }
+        contactRepository.delete(contact);
+        return "kontakt kustutatud";
+
+    }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,18 @@ public class ContactController {
 
         String result = contactService.addContact(nimi, koodNimi, telefon);
         if (result == "ok") {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(400).body(result);
+        }
+
+    }
+
+    @DeleteMapping(path = "delete-contact")
+    public ResponseEntity<String> deletecontact(@RequestParam Long id) {
+
+        String result = contactService.deleteContact(id);
+        if (result == "kontakt kustutatud") {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.status(400).body(result);
